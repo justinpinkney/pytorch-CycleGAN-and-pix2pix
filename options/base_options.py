@@ -57,7 +57,7 @@ class BaseOptions():
         self.initialized = True
         return parser
 
-    def gather_options(self):
+    def gather_options(self, input_args=None):
         """Initialize our parser with basic options(only once).
         Add additional model-specific and dataset-specific options.
         These options are defined in the <modify_commandline_options> function
@@ -83,7 +83,10 @@ class BaseOptions():
 
         # save and return the parser
         self.parser = parser
-        return parser.parse_args()
+        if input_args:
+            return parser.parse_args(input_args)
+        else:
+            return parser.parse_args()
 
     def print_options(self, opt):
         """Print and save options
