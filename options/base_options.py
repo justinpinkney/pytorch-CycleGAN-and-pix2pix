@@ -68,8 +68,11 @@ class BaseOptions():
             parser = self.initialize(parser)
 
         # get the basic options
-        opt, _ = parser.parse_known_args()
-
+        if input_args:
+            opt, _ = parser.parse_known_args(input_args)
+        else:
+            opt, _ = parser.parse_known_args()
+            
         # modify model-related parser options
         model_name = opt.model
         model_option_setter = models.get_option_setter(model_name)
